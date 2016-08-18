@@ -27,6 +27,9 @@ gem 'devise'
 # USer bower package manager for rails
 gem 'bower-rails'
 
+# In order to set test seed data for customers
+gem 'faker'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
