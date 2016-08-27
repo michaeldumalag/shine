@@ -5,8 +5,8 @@
                   customers_path(keywords: keywords, page: page - 1) %>
     </li>
     <li class="next">
-      <%= link_to, "&Rrarr; Previous".html_safe,
-                  customers_path(keywords: keywords, page: page - 1) %>
+      <%= link_to "Next &rarr;".html_safe,
+                  customers_path(keywords: keywords, page: page + 1) %>
     </li>
   </ul>
 </nav>
