@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Customer routes
   resources :customers, only: [ :index ]
 
+  get "angular_test", to: "angular_test#index"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
