@@ -12,7 +12,7 @@ app.controller("CustomerSearchController", [
       },function(response) {
           alert("There was a problem: " + response.status);
         }
-      );
+      )
     }
   }
 ]);
