@@ -27,6 +27,10 @@ gem 'devise'
 # USer bower package manager for rails
 gem 'bower-rails'
 
+# To handle angular templates
+gem "angular-rails-templates"
+gem "sprockets", "~> 2.0"
+
 # In order to set test seed data for customers
 gem 'faker'
 
