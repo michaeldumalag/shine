@@ -1,7 +1,8 @@
 var app = angular.module(
   'customers',
   [
-    'ngRoute'
+    'ngRoute',
+    'templates'
   ]
 );
 app.config([
