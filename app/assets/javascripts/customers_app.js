@@ -8,10 +8,11 @@ var app = angular.module(
 app.config([
           "$routeProvider",
   function($routeProvider) {
+
     $routeProvider.when("/", {
       controller: "CustomerSearchController",
       templateUrl: "customer_search.html"
-    })
+    });
   }
 ]);
 
