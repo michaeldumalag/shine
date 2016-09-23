@@ -63,6 +63,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -203,6 +204,7 @@ DEPENDENCIES
   bower-rails
   byebug
   coffee-rails (~> 4.1.0)
+  database_cleaner
   devise
   faker
   jbuilder (~> 2.0)
