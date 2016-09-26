@@ -31,3 +31,16 @@
 // the configuration and use this file as a manifest.
 //
 // For more information: http://github.com/modeset/teaspoon
+beforeEach(function() {
+  jasmine.addMatchers({
+    toEqualData: function(util,customEqualtiyTesters) {
+      return {
+        compare: function(actual,expected) {
+          var result = {};
+          result.pass = angular.equals(actual, expected);
+          return result;
+        }
+      };
+    }
+  });
+});
