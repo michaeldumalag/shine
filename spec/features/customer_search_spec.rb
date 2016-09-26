@@ -1,4 +1,4 @@
-require 'rail_helper'
+require 'rails_helper'
 
 feature "Customer Search"  do
   def create_customer(first_name: nil, 
@@ -55,11 +55,11 @@ feature "Customer Search"  do
       expect(page).to have_content("Results")
       expect(page.all("ol li.list-group-item").count).to eq(4)
 
-      expect(page.all("ol li.list-group-item")[0].to have_content("JR")
-      expect(page.all("ol li.list-group-item")[0].to have_content("Bob")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("JR")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Bob")
 
-      expect(page.all("ol li.list-group-item")[3].to have_content("Bob")
-      expect(page.all("ol li.list-group-item")[3].to have_content("Jones")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("Bob")
+      expect(page.all("ol li.list-group-item")[3]).to have_content("Jones")
     end
   end
 
@@ -69,16 +69,10 @@ feature "Customer Search"  do
     end
     within "section.search-results" do
       expect(page).to have_content("Results")
-      expect(page.all("ol li.list-group-item").count).to eq(4)
+      expect(page.all("ol li.list-group-item").count).to eq(1)
 
-      expect(page.all("ol li.list-group-item")[0].to have_content("Bob")
-      expect(page.all("ol li.list-group-item")[0].to have_content("Jones")
-
-      expect(page.all("ol li.list-group-item")[1].to have_content("JR")
-      expect(page.all("ol li.list-group-item")[1].to have_content("Bob")
-      
-      expect(page.all("ol li.list-group-item")[3].to have_content("Bob") 
-      expect(page.all("ol li.list-group-item")[3].to have_content("Johnson")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Bob")
+      expect(page.all("ol li.list-group-item")[0]).to have_content("Jones")
     end
   end
 end
