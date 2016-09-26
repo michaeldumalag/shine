@@ -29,12 +29,24 @@ app.controller("CustomerSearchController", [
       }
       $http.get("/customers.json",
                 { "params": { "keywords": searchTerm, "page": page } }
-      ).then(function(response) {
+      ).success(
+        function(data,status,headers,config) { 
+          $scope.customers = data;
+          // $scope.loading = false;
+      }).error(
+        function(data,status,headers,config) {
+          // $scope.loading = false;
+          alert("There was a problem: " + status);
+        });
+// another possible version of the above callback methods
+/*
+      .then(function(response) {
           $scope.customers = response.data;
       },function(response) {
           alert("There was a problem: " + response.status);
         }
       )
+*/
     }
 
     $scope.previousPage = function() {
