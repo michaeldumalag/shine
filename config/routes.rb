@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   # Customer routes
-  resources :customers, only: [ :index ]
+  resources :customers, only: [ :index, :show ]
 
   get "angular_test", to: "angular_test#index"
   # Example of regular route:

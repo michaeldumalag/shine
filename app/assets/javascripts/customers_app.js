@@ -32,15 +32,23 @@ app.controller("CustomerSearchController", [
       }
       $http.get("/customers.json",
                 { "params": { "keywords": searchTerm, "page": page } }
-      ).success(
-        function(data,status,headers,config) { 
-          $scope.customers = data;
-          // $scope.loading = false;
-      }).error(
-        function(data,status,headers,config) {
-          // $scope.loading = false;
-          alert(x + status);
-        });
+      ).then(function(response) {
+          $scope.customers = response.data;
+        },function(response) {
+          alert("There was a problem: " + response.status);
+        }
+      );
+
+
+      // .success(
+      //   function(data,status,headers,config) { 
+      //     $scope.customers = data;
+      //     // $scope.loading = false;
+      // }).error(
+      //   function(data,status,headers,config) {
+      //     // $scope.loading = false;
+      //     alert("There was a problem: " + status);
+      //   });
 // another possible version of the above callback methods
 /*
       .then(function(response) {
@@ -69,3 +77,25 @@ app.controller("CustomerSearchController", [
     }
   }
 ]);
+
+app.controller("CustomerDetailController", [
+          "$scope", "$http", "$routeParams",
+  function($scope, $http, $routeParams) {
+    var customerId = $routeParams.id;
+    $scope.customer = {};
+
+    $http.get(
+      "/customers/" + customerId + ".json"
+    ).then(function(response) {
+        $scope.customer = response.data;
+      },function(response) {
+        alert("There was a problem: " + response.status);
+      }
+    );
+  }
+]);
+
+
+
+
+
