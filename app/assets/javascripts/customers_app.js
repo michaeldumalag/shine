@@ -12,13 +12,16 @@ app.config([
     $routeProvider.when("/", {
       controller: "CustomerSearchController",
       templateUrl: "customer_search.html"
+    }).when("/:id",{
+       controller: "CustomerDetailController",
+      templateUrl: "customer_detail.html"
     });
   }
 ]);
 
 app.controller("CustomerSearchController", [
-          "$scope", "$http",
-  function($scope, $http) {
+          "$scope", "$http", "$location",
+  function($scope, $http, $location) {
 
     var page = 0;
 
@@ -36,7 +39,7 @@ app.controller("CustomerSearchController", [
       }).error(
         function(data,status,headers,config) {
           // $scope.loading = false;
-          alert("There was a problem: " + status);
+          alert(x + status);
         });
 // another possible version of the above callback methods
 /*
@@ -55,9 +58,14 @@ app.controller("CustomerSearchController", [
         $scope.search($scope.keywords);
       }
     }
+
     $scope.nextPage = function() {
       page = page + 1;
       $scope.search($scope.keywords);
+    }
+
+    $scope.viewDetails = function(customer) {
+      $location.path("/" + customer.id);
     }
   }
 ]);
