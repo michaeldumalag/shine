@@ -12,15 +12,15 @@ class AddAddresses < ActiveRecord::Migration
       t.string      :zipcode,  null: false
     end
 
-    create_table :customer_billing_addresses do |t|
+    create_table :customers_billing_addresses do |t|
       t.references :customer, null: false
       t.references :address,  null: false
     end
 
-    create_table :customer_shipping_addresses do |t|
+    create_table :customers_shipping_addresses do |t|
       t.references :customer, null: false
       t.references :address,  null: false
-      t.boolean    :primary,  null: false
+      t.boolean    :primary,  null: false, default: false
     end
   end
 end

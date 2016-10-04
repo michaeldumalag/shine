@@ -66,36 +66,6 @@ ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
 
 
 --
--- Name: customer_billing_addresses; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE customer_billing_addresses (
-    id integer NOT NULL,
-    customer_id integer NOT NULL,
-    address_id integer NOT NULL
-);
-
-
---
--- Name: customer_billing_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE customer_billing_addresses_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: customer_billing_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE customer_billing_addresses_id_seq OWNED BY customer_billing_addresses.id;
-
-
---
 -- Name: customer_search_terms; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -126,37 +96,6 @@ ALTER SEQUENCE customer_search_terms_id_seq OWNED BY customer_search_terms.id;
 
 
 --
--- Name: customer_shipping_addresses; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE customer_shipping_addresses (
-    id integer NOT NULL,
-    customer_id integer NOT NULL,
-    address_id integer NOT NULL,
-    "primary" boolean NOT NULL
-);
-
-
---
--- Name: customer_shipping_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE customer_shipping_addresses_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: customer_shipping_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE customer_shipping_addresses_id_seq OWNED BY customer_shipping_addresses.id;
-
-
---
 -- Name: customers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -169,6 +108,36 @@ CREATE TABLE customers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
+
+
+--
+-- Name: customers_billing_addresses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customers_billing_addresses (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
+-- Name: customers_billing_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customers_billing_addresses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customers_billing_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customers_billing_addresses_id_seq OWNED BY customers_billing_addresses.id;
 
 
 --
@@ -188,6 +157,37 @@ CREATE SEQUENCE customers_id_seq
 --
 
 ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
+
+
+--
+-- Name: customers_shipping_addresses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customers_shipping_addresses (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    address_id integer NOT NULL,
+    "primary" boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: customers_shipping_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customers_shipping_addresses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customers_shipping_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customers_shipping_addresses_id_seq OWNED BY customers_shipping_addresses.id;
 
 
 --
@@ -281,13 +281,6 @@ ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customer_billing_addresses ALTER COLUMN id SET DEFAULT nextval('customer_billing_addresses_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY customer_search_terms ALTER COLUMN id SET DEFAULT nextval('customer_search_terms_id_seq'::regclass);
 
 
@@ -295,14 +288,21 @@ ALTER TABLE ONLY customer_search_terms ALTER COLUMN id SET DEFAULT nextval('cust
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customer_shipping_addresses ALTER COLUMN id SET DEFAULT nextval('customer_shipping_addresses_id_seq'::regclass);
+ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
+ALTER TABLE ONLY customers_billing_addresses ALTER COLUMN id SET DEFAULT nextval('customers_billing_addresses_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customers_shipping_addresses ALTER COLUMN id SET DEFAULT nextval('customers_shipping_addresses_id_seq'::regclass);
 
 
 --
@@ -328,14 +328,6 @@ ALTER TABLE ONLY addresses
 
 
 --
--- Name: customer_billing_addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY customer_billing_addresses
-    ADD CONSTRAINT customer_billing_addresses_pkey PRIMARY KEY (id);
-
-
---
 -- Name: customer_search_terms_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -344,11 +336,11 @@ ALTER TABLE ONLY customer_search_terms
 
 
 --
--- Name: customer_shipping_addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: customers_billing_addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY customer_shipping_addresses
-    ADD CONSTRAINT customer_shipping_addresses_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY customers_billing_addresses
+    ADD CONSTRAINT customers_billing_addresses_pkey PRIMARY KEY (id);
 
 
 --
@@ -357,6 +349,14 @@ ALTER TABLE ONLY customer_shipping_addresses
 
 ALTER TABLE ONLY customers
     ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers_shipping_addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY customers_shipping_addresses
+    ADD CONSTRAINT customers_shipping_addresses_pkey PRIMARY KEY (id);
 
 
 --
