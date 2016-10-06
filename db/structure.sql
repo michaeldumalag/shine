@@ -101,9 +101,13 @@ CREATE TABLE customers (
 --
 
 CREATE TABLE customers_billing_addresses (
+-- Name: customer_search_terms; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customer_search_terms (
     id integer NOT NULL,
-    customer_id integer NOT NULL,
-    address_id integer NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -159,20 +163,6 @@ CREATE MATERIALIZED VIEW customer_details AS
      JOIN addresses shipping_address ON ((shipping_address.id = customers_shipping_addresses.address_id)))
      JOIN states shipping_state ON ((shipping_address.state_id = shipping_state.id)))
   WITH NO DATA;
-
-
---
--- Name: customer_search_terms; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE customer_search_terms (
-    id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
 -- Name: customer_search_terms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -192,6 +182,32 @@ ALTER SEQUENCE customer_search_terms_id_seq OWNED BY customer_search_terms.id;
 
 
 --
+-- Name: customers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customers (
+    id integer NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    email character varying NOT NULL,
+    username character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: customers_billing_addresses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customers_billing_addresses (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
 -- Name: customers_billing_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -204,6 +220,10 @@ CREATE SEQUENCE customers_billing_addresses_id_seq
 
 
 --
+-- Name: customers_billing_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customers_billing_addresses_id_seq
 -- Name: customers_billing_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -223,10 +243,45 @@ CREATE SEQUENCE customers_id_seq
 
 
 --
+-- Name: customers_billing_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customers_billing_addresses_id_seq OWNED BY customers_billing_addresses.id;
 -- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
+
+
+--
+-- Name: customers_shipping_addresses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE customers_shipping_addresses (
+    id integer NOT NULL,
+    customer_id integer NOT NULL,
+    address_id integer NOT NULL,
+    "primary" boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: customers_shipping_addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE customers_shipping_addresses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customers_shipping_addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE customers_shipping_addresses_id_seq OWNED BY customers_shipping_addresses.id;
 
 
 --
@@ -534,4 +589,3 @@ INSERT INTO schema_migrations (version) VALUES ('20160929055245');
 INSERT INTO schema_migrations (version) VALUES ('20161005005753');
 
 INSERT INTO schema_migrations (version) VALUES ('20161006011959');
-
